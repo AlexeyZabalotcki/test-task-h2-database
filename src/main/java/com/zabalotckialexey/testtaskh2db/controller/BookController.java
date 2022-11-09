@@ -85,4 +85,9 @@ public class BookController {
     public ResponseEntity<List<Book>> search(@RequestParam("title") String title) {
         return ResponseEntity.ok(bookService.findBookByTitle(title));
     }
+
+    @PostMapping("/search-date")
+    public ResponseEntity<List<Book>> searchDate(@RequestParam("date") String date) {
+        return ResponseEntity.ok(bookService.findBookByDate(date));
+    }
 }

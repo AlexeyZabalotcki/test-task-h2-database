@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -16,8 +15,7 @@ public interface MagazineRepository extends JpaRepository<Magazine, Long> {
             "order by m.title asc")
     List<Magazine> findByTitle(@Param("title") String title);
 
-
-    @Query("select m from Magazine m where m.publicationDate = :date ")
-    List<Magazine> findByPublicationDate(@Param("date") Date date);
+    @Query("select m from Magazine m where m.publicationDate = (concat('',:publication_date,''))")
+    List<Magazine> findByPublicationDate(@Param("publication_date") String date);
 
 }

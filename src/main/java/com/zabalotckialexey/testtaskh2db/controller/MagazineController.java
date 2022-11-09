@@ -85,4 +85,9 @@ public class MagazineController {
     public ResponseEntity<List<Magazine>> search(@RequestParam("title") String title) {
         return ResponseEntity.ok(magazineService.findMagazineByTitle(title));
     }
+
+    @PostMapping("/search-date")
+    public ResponseEntity<List<Magazine>> searchDate(@RequestParam("date") String date) {
+        return ResponseEntity.ok(magazineService.findMagazineByDate(date));
+    }
 }

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -17,7 +16,6 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Long> {
             "order by n.title asc")
     List<Newspaper> findByTitle(@Param("title") String title);
 
-
-    @Query("select n from Newspaper n where n.publicationDate = :date ")
-    List<Newspaper> findByPublicationDate(@Param("date") Date date);
+    @Query("select n from Newspaper n where n.publicationDate = (concat('',:publication_date,''))")
+    List<Newspaper> findByPublicationDate(@Param("publication_date") String date);
 }
