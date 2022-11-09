@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +26,7 @@ public class NewspaperService {
         return newspaperRepository.findByTitle(title);
     }
 
-    public List<Newspaper> findNewspaperByDate(Date date) {
+    public List<Newspaper> findNewspaperByDate(String date) {
         return newspaperRepository.findByPublicationDate(date);
     }
 

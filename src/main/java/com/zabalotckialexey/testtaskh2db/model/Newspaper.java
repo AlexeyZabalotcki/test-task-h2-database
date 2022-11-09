@@ -22,6 +22,7 @@ public class Newspaper {
     private String author;
     private String title;
     private String publisher;
+    @Temporal(TemporalType.DATE)
     @Column(name = "publication_date")
     private Date publicationDate;
 
