@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  h2:
+    image: buildo/h2database
+    container_name: h2
+    ports:
+      - '8081:8082'
+
+  app:
+    build: ./
+    container_name: test-task
+    restart: unless-stopped
+    ports:
+      - '8083:8083'
