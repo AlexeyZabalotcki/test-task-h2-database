@@ -81,7 +81,7 @@ public class MagazineController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/search")
+    @PostMapping("/search-title")
     public ResponseEntity<List<Magazine>> search(@RequestParam("title") String title) {
         return ResponseEntity.ok(magazineService.findMagazineByTitle(title));
     }
@@ -89,5 +89,15 @@ public class MagazineController {
     @PostMapping("/search-date")
     public ResponseEntity<List<Magazine>> searchDate(@RequestParam("date") String date) {
         return ResponseEntity.ok(magazineService.findMagazineByDate(date));
+    }
+
+    @PostMapping("/search-editor")
+    public ResponseEntity<List<Magazine>> searchEditor(@RequestParam("editor") String editor) {
+        return ResponseEntity.ok(magazineService.findMagazineByEditor(editor));
+    }
+
+    @PostMapping("/search-publisher")
+    public ResponseEntity<List<Magazine>> searchPublisher(@RequestParam("publisher") String publisher) {
+        return ResponseEntity.ok(magazineService.findBookByPublisher(publisher));
     }
 }

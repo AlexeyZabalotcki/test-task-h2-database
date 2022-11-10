@@ -81,7 +81,7 @@ public class BookController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/search")
+    @PostMapping("/search-title")
     public ResponseEntity<List<Book>> search(@RequestParam("title") String title) {
         return ResponseEntity.ok(bookService.findBookByTitle(title));
     }
@@ -89,5 +89,15 @@ public class BookController {
     @PostMapping("/search-date")
     public ResponseEntity<List<Book>> searchDate(@RequestParam("date") String date) {
         return ResponseEntity.ok(bookService.findBookByDate(date));
+    }
+
+    @PostMapping("/search-author")
+    public ResponseEntity<List<Book>> searchAuthor(@RequestParam("author") String author) {
+        return ResponseEntity.ok(bookService.findBookByAuthor(author));
+    }
+
+    @PostMapping("/search-publisher")
+    public ResponseEntity<List<Book>> searchPublisher(@RequestParam("publisher") String publisher) {
+        return ResponseEntity.ok(bookService.findBookByPublisher(publisher));
     }
 }

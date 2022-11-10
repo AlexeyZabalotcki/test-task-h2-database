@@ -90,4 +90,14 @@ public class NewspaperController {
     public ResponseEntity<List<Newspaper>> searchDate(@RequestParam("date") String date) {
         return ResponseEntity.ok(newspaperService.findNewspaperByDate(date));
     }
+
+    @PostMapping("/search-author")
+    public ResponseEntity<List<Newspaper>> searchAuthor(@RequestParam("author") String author) {
+        return ResponseEntity.ok(newspaperService.findNewspaperByAuthor(author));
+    }
+
+    @PostMapping("/search-publisher")
+    public ResponseEntity<List<Newspaper>> searchPublisher(@RequestParam("publisher") String publisher) {
+        return ResponseEntity.ok(newspaperService.findBookByPublisher(publisher));
+    }
 }

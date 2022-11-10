@@ -30,6 +30,14 @@ public class NewspaperService {
         return newspaperRepository.findByPublicationDate(date);
     }
 
+    public List<Newspaper> findNewspaperByAuthor(String author) {
+        return newspaperRepository.findByAuthor(author);
+    }
+
+    public List<Newspaper> findBookByPublisher(String publisher) {
+        return newspaperRepository.findByPublisher(publisher);
+    }
+
     public Newspaper add(Newspaper newspaper) {
         return newspaperRepository.save(newspaper);
     }
