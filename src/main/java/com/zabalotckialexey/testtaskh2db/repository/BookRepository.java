@@ -15,6 +15,16 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             "order by b.title asc")
     List<Book> findByTitle(@Param("title") String title);
 
+    @Query("SELECT b from Book b where " +
+            "(:author is null or :author='' or lower(b.author) like lower(concat('%',:author, '%'))) " +
+            "order by b.author asc")
+    List<Book> findByAuthor(@Param("author") String author);
+
+    @Query("SELECT b from Book b where " +
+            "(:publisher is null or :publisher='' or lower(b.publisher) like lower(concat('%',:publisher, '%'))) " +
+            "order by b.publisher asc")
+    List<Book> findByPublisher(@Param("publisher") String publisher);
+
     @Query("select b from Book b where b.publicationDate = (concat('',:publication_date,''))")
     List<Book> findByPublicationDate(@Param("publication_date") String publicationDate);
 

@@ -26,6 +26,14 @@ public class MagazineService {
         return magazineRepository.findByTitle(title);
     }
 
+    public List<Magazine> findMagazineByEditor(String editor) {
+        return magazineRepository.findByEditor(editor);
+    }
+
+    public List<Magazine> findBookByPublisher(String publisher) {
+        return magazineRepository.findByPublisher(publisher);
+    }
+
     public List<Magazine> findMagazineByDate(String date) {
         return magazineRepository.findByPublicationDate(date);
     }
