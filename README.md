@@ -23,7 +23,7 @@ __If you have a Linux OS or have a Docker Desktop on your computer:__
 
 ___If you don't have a Linux OS or Docker Desktop on your computer, just stop project via your IDE___
 
-#__Steps for work with application:__
+# __Steps for work with application:__
 
 __Work with books:__
 
