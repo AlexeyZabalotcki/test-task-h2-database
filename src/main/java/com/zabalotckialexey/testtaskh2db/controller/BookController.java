@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,32 +24,18 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Book> add(@RequestBody Book book) {
+    public ResponseEntity<Book> add(@RequestBody @Valid Book book) {
         if (book.getId() != null && book.getId() != 0) {
             return new ResponseEntity("redundant param: id MUST be null", HttpStatus.NOT_ACCEPTABLE);
         }
-        if (book.getAuthor() == null || book.getAuthor().trim().length() == 0) {
-            return new ResponseEntity("missed param: author", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (book.getTitle() == null || book.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (book.getPublisher() == null || book.getPublisher().trim().length() == 0) {
-            return new ResponseEntity("missed param: publisher", HttpStatus.NOT_ACCEPTABLE);
-        }
+
         return ResponseEntity.ok(bookService.add(book));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Book> update(@RequestBody Book book) {
+    public ResponseEntity<Book> update(@RequestBody @Valid Book book) {
         if (book.getId() == null || book.getId() == 0) {
             return new ResponseEntity("Error: id MUST be fill", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (book.getAuthor() == null || book.getAuthor().trim().length() == 0) {
-            return new ResponseEntity("missed param: you MUST fill author form", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (book.getTitle() == null || book.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: you MUST fill title form", HttpStatus.NOT_ACCEPTABLE);
         }
 
         bookService.update(book);
