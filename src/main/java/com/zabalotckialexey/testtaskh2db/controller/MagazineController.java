@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,32 +24,18 @@ public class MagazineController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Magazine> add(@RequestBody Magazine magazine) {
+    public ResponseEntity<Magazine> add(@RequestBody @Valid Magazine magazine) {
         if (magazine.getId() != null && magazine.getId() != 0) {
             return new ResponseEntity("redundant param: id MUST be null", HttpStatus.NOT_ACCEPTABLE);
         }
-        if (magazine.getEditor() == null || magazine.getEditor().trim().length() == 0) {
-            return new ResponseEntity("missed param: editor", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (magazine.getTitle() == null || magazine.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (magazine.getPublisher() == null || magazine.getPublisher().trim().length() == 0) {
-            return new ResponseEntity("missed param: publisher", HttpStatus.NOT_ACCEPTABLE);
-        }
+
         return ResponseEntity.ok(magazineService.add(magazine));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Magazine> update(@RequestBody Magazine magazine) {
+    public ResponseEntity<Magazine> update(@RequestBody @Valid Magazine magazine) {
         if (magazine.getId() == null || magazine.getId() == 0) {
             return new ResponseEntity("Error: id MUST be fill", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (magazine.getEditor() == null || magazine.getEditor().trim().length() == 0) {
-            return new ResponseEntity("missed param: you MUST fill editor form", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (magazine.getTitle() == null || magazine.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: you MUST fill title form", HttpStatus.NOT_ACCEPTABLE);
         }
 
         magazineService.update(magazine);
@@ -78,6 +65,7 @@ public class MagazineController {
             ex.printStackTrace();
             return new ResponseEntity("That id: " + id + " not found", HttpStatus.NOT_ACCEPTABLE);
         }
+
         return new ResponseEntity(HttpStatus.OK);
     }
 

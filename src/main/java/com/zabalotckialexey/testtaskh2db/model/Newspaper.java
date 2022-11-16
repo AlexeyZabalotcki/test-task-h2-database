@@ -4,26 +4,33 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "newspapers")
+@Table(name = "NEWSPAPERS")
 public class Newspaper {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Please, enter author name")
     private String author;
+    @NotNull(message = "Please, enter book's title")
     private String title;
+    @NotNull(message = "Please, enter publisher's name")
     private String publisher;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "publication_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column("PUBLICATION_DATE")
+    @NotNull(message = "Please, enter a date")
     private Date publicationDate;
 
 }

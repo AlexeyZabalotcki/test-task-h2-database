@@ -4,12 +4,10 @@ import com.zabalotckialexey.testtaskh2db.model.Magazine;
 import com.zabalotckialexey.testtaskh2db.repository.MagazineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class MagazineService {
     private final MagazineRepository magazineRepository;
@@ -23,19 +21,19 @@ public class MagazineService {
     }
 
     public List<Magazine> findMagazineByTitle(String title) {
-        return magazineRepository.findByTitle(title);
+        return magazineRepository.findByTitleContains(title);
     }
 
     public List<Magazine> findMagazineByEditor(String editor) {
-        return magazineRepository.findByEditor(editor);
+        return magazineRepository.findAllByEditorContains(editor);
     }
 
     public List<Magazine> findBookByPublisher(String publisher) {
-        return magazineRepository.findByPublisher(publisher);
+        return magazineRepository.findByPublisherContains(publisher);
     }
 
     public List<Magazine> findMagazineByDate(String date) {
-        return magazineRepository.findByPublicationDate(date);
+        return magazineRepository.findAllByPublicationDateContaining(date);
     }
 
     public Magazine add(Magazine magazine) {

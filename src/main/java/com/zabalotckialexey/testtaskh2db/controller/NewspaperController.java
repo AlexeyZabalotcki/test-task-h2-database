@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,32 +24,18 @@ public class NewspaperController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Newspaper> add(@RequestBody Newspaper newspaper) {
+    public ResponseEntity<Newspaper> add(@RequestBody @Valid Newspaper newspaper) {
         if (newspaper.getId() != null && newspaper.getId() != 0) {
             return new ResponseEntity("redundant param: id MUST be null", HttpStatus.NOT_ACCEPTABLE);
         }
-        if (newspaper.getAuthor() == null || newspaper.getAuthor().trim().length() == 0) {
-            return new ResponseEntity("missed param: author", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (newspaper.getTitle() == null || newspaper.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (newspaper.getPublisher() == null || newspaper.getPublisher().trim().length() == 0) {
-            return new ResponseEntity("missed param: publisher", HttpStatus.NOT_ACCEPTABLE);
-        }
+
         return ResponseEntity.ok(newspaperService.add(newspaper));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Newspaper> update(@RequestBody Newspaper newspaper) {
+    public ResponseEntity<Newspaper> update(@RequestBody @Valid Newspaper newspaper) {
         if (newspaper.getId() == null || newspaper.getId() == 0) {
             return new ResponseEntity("Error: id MUST be fill", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (newspaper.getAuthor() == null || newspaper.getAuthor().trim().length() == 0) {
-            return new ResponseEntity("missed param: you MUST fill author form", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (newspaper.getTitle() == null || newspaper.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: you MUST fill title form", HttpStatus.NOT_ACCEPTABLE);
         }
 
         newspaperService.update(newspaper);
