@@ -10,6 +10,7 @@
 __If you have a Linux OS or have a Docker Desktop on your computer:__
 
 * open folder with project in the terminal ```cd 'your project folder'```
+* enter ```mvn clean install```
 * enter ```docker-compose up -d```
 
 ___If you don't have a Linux OS or Docker Desktop on your computer, just run project via your IDE___
