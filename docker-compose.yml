@@ -9,7 +9,7 @@ services:
 
   app:
     build: ./
-    container_name: test-task
+    container_name: test-task-1
     restart: unless-stopped
     ports:
       - '8083:8083'
