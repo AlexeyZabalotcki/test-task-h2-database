@@ -4,12 +4,10 @@ import com.zabalotckialexey.testtaskh2db.model.Book;
 import com.zabalotckialexey.testtaskh2db.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
@@ -23,19 +21,19 @@ public class BookService {
     }
 
     public List<Book> findBookByTitle(String title) {
-        return bookRepository.findByTitle(title);
+        return bookRepository.findByTitleContains(title);
     }
 
     public List<Book> findBookByAuthor(String author) {
-        return bookRepository.findByAuthor(author);
+        return bookRepository.findAllByAuthorContains(author);
     }
 
     public List<Book> findBookByPublisher(String publisher) {
-        return bookRepository.findByPublisher(publisher);
+        return bookRepository.findByPublisherContains(publisher);
     }
 
     public List<Book> findBookByDate(String date) {
-        return bookRepository.findByPublicationDate(date);
+        return bookRepository.findAllByPublicationDateContaining(date);
     }
 
     public Book add(Book book) {
